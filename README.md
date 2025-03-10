@@ -12,7 +12,7 @@
 
 Запуск програми
 
-![Запуск програми](PictureReadme/RunProg.png)
+![Запуск програми](PictureReadme/ProgRun.png)
 
 Підтвердження
 
