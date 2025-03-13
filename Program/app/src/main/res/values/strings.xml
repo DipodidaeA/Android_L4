@@ -20,6 +20,7 @@
     <string name="check_box_pizza_count_3">3</string>
 
     <string name="button_end_order">OK</string>
+    <string name="button_show_orders">Show Orders</string>
 
     <!--  message fragment  -->
     <string name="fragment_text_type">Msg type</string>
@@ -30,6 +31,11 @@
     <string name="order_error">Order Error</string>
     <string name="order_success">Order Success</string>
 
+    <!--  show order activity  -->
+    <string name="text_orders">Orders</string>
+    <string name="text_hint">Time: HH:mm dd-MM-yyyy\nType: name\nSize: num\nCount: num</string>
+    <string name="button_end_activity">CLOSE</string>
+    <string name="button_update">Update</string>
 
 
 </resources>

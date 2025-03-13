@@ -1,5 +1,6 @@
 package com.example.pizzastore
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -35,6 +36,7 @@ class FragmentOrderActivity : Fragment(R.layout.order_fragment){
         val count3 = view.findViewById<CheckBox>(R.id.checkBox_Pizza_Count_3)
 
         val buttonConfirm = view.findViewById<Button>(R.id.button_Confirm)
+        val buttonShow = view.findViewById<Button>(R.id.button_Show_Orders)
 
         val pizzaTypes = listOf(mozzarella, hawaiian, pepperoni)
         val pizzaSizes = listOf(size25, size35, size45)
@@ -47,6 +49,7 @@ class FragmentOrderActivity : Fragment(R.layout.order_fragment){
         clickCheckBox(pizzaCounts)
 
         clickButton(buttonConfirm, allParam)
+        clickButtonShow(buttonShow);
 
     }
 
@@ -63,8 +66,8 @@ class FragmentOrderActivity : Fragment(R.layout.order_fragment){
         }
     }
 
-    private fun clickButton(buttonConfirm: Button, allCheckBoxes: AllCheckBoxes){
-        buttonConfirm.setOnClickListener {
+    private fun clickButton(button: Button, allCheckBoxes: AllCheckBoxes){
+        button.setOnClickListener {
             // шукаємо вибрані дані
             val selectPizzaType = allCheckBoxes.pizzaType.find { checkBox -> checkBox.isChecked }
             val selectPizzaSize = allCheckBoxes.pizzaSize.find { checkBox -> checkBox.isChecked }
@@ -72,14 +75,22 @@ class FragmentOrderActivity : Fragment(R.layout.order_fragment){
 
             // якщо не всі параметри вибрані виводимо повідомлення попередження
             if (selectPizzaType == null || selectPizzaSize == null || selectPizzaCount == null){
-                (activity as? MainActivity)?.showMessage("Not all parameters checked", "alert")
+                (activity as? MainActivity)?.showMessage(listOf("Not all parameters checked"), "alert")
             } else {
-                val orderDetails = "Type: ${selectPizzaType.text}\n" +
-                        "Size: ${selectPizzaSize.text}\n" +
-                        "Count: ${selectPizzaCount.text}"
+                val orderDetails = listOf(selectPizzaType.text.toString(), selectPizzaSize.text.toString(), selectPizzaCount.text.toString())
 
                 (activity as? MainActivity)?.showMessage(orderDetails, "success")
             }
+        }
+    }
+
+    private fun clickButtonShow(button: Button){
+        button.setOnClickListener{
+            val intent = Intent(requireContext(), ShowOrdersActivity::class.java)
+
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+
+            startActivity(intent)
         }
     }
 

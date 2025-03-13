@@ -24,18 +24,32 @@ class FragmentActivity : Fragment(R.layout.message_fragment) {
         val msgTextType = view.findViewById<TextView>(R.id.messageType)
         val closeButton = view.findViewById<Button>(R.id.closeButton)
 
-        val message = arguments?.getString("message") ?: "Text Error"
-        val type = arguments?.getString("type")
+        val data = arguments?.getStringArrayList("data") ?: listOf("Text Error", "", "")
+        val type = arguments?.getString("type")?: "alert"
 
-        messageText.text = message
+        val message: String
 
-        // змінюємо колій тексту
+        // змінюємо колір тексту
         if (type == "alert") {
+            message = "${data[0]}\n"
+
+            messageText.text = message
             msgTextType.text = getString(R.string.order_error)
+
             messageText.setTextColor(Color.RED)
+            msgTextType.setTextColor(Color.RED)
         } else {
+            message = "Type: ${data[0]}\n" +
+                    "Size: ${data[1]}\n" +
+                    "Count: ${data[2]}"
+
+            messageText.text = message
             msgTextType.text = getString(R.string.order_success)
+
             messageText.setTextColor(Color.GREEN)
+            msgTextType.setTextColor(Color.GREEN)
+
+            (activity as? MainActivity)?.saveDataInFile(view ,data)
         }
 
         closeButton.setOnClickListener {
@@ -48,10 +62,10 @@ class FragmentActivity : Fragment(R.layout.message_fragment) {
     }
 
     companion object {
-        fun newInstance(message: String, type: String): FragmentActivity {
+        fun newInstance(message: List<String>, type: String): FragmentActivity {
             val fragment = FragmentActivity()
             val args = Bundle()
-            args.putString("message", message)
+            args.putStringArrayList("data", ArrayList(message))
             args.putString("type", type)
             fragment.arguments = args
             return fragment
