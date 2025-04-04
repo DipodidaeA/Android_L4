@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.pizzastore"
+    namespace = "com.example.player"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.example.pizzastore"
+        applicationId = "com.example.player"
         minSdk = 24
         targetSdk = 35
         versionCode = 1
@@ -45,5 +45,4 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    implementation("androidx.fragment:fragment-ktx:1.8.6")
 }

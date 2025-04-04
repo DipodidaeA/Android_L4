@@ -1,4 +1,4 @@
-package com.example.pizzastore
+package com.example.player
 
 import org.junit.Test
 
