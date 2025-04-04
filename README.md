@@ -12,4 +12,4 @@
 
 Робота з відео
 
-![Очищення чекбоксів](PictureReadme/RyA.png)
+![Очищення чекбоксів](PictureReadme/RyV.png)
